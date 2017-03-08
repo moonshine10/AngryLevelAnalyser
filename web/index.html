@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bitchin' Tweets</title>
+	<!--Bootstrap-->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	
+	<!-- Importing custom css -->
+	<link rel="stylesheet" type="text/css" href="beauty.css">
+	
+	<script src="raphael.js"></script>
+	<!-- <script src="scale.raphael.js"></script> -->
+	<!-- // <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js"></script> -->
+
+	<!-- JQuery and JQuery UI  -->
+	<link rel="stylesheet" href="jquery-ui-1.11.4.custom/jquery-ui.min.css">
+	<script src="jquery-ui-1.11.4.custom/external/jquery/jquery.js"></script>
+	<script src="jquery-ui-1.11.4.custom/jquery-ui.min.js"></script>
+	<!-- Map Customization -->
+	<script src="color.jquery.js"></script>
+	<script src="jquery.usmap.js"></script>
+
+	<!-- firebase CDN -->
+	<script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+
+	<script>
+
+	var colorMap = {};
+	var colorMap2 = {};
+	var statedata = {};
+	var ref = new Firebase("https://bitchynesstracker.firebaseio.com/Bitchyness");
+	ref.orderByValue().on("value", function(snapshot) {
+		snapshot.forEach(function(states) {
+
+			var state = states.val();
+			var abree = String(states.val().abrev);
+			var score = states.val().score;
+			var name = state.name;
+			var bitchyiest = state.bitchtweet;
+
+
+				// 0-.299    Not Bitchy at all
+				// .3-.3999  Not quite Bitchy
+				// .4-.425   A bit Bitchy
+				// .426-.45   Slightly Bitchy
+				// .451-.475 Quite Bitchy
+				// .476-.5 Medium Bitchy
+				// .5-.525 Bitchy
+				// .526-.55 Very Bitchy
+				// .551-.575 Very Very Bitchy
+				// .576-.6 Incredibly Bitchy!
+				// .601-.7 Extremely Bitchy!!
+				// .7+  Off the Charts Bitchy!!!
+
+			var color;
+				if (0 <= score <= .299 ){
+					color = "#ffffff";
+				} 
+				else if(.3 <= score <= .3999){
+					color = "#ffe5e5";
+				}
+				else if(.4 <= score <= .425){
+					color = "#ffcccc";
+				}
+				else if(.426 <= score <= .45){
+					color = "#ffb2b2";
+				}
+				else if(.451 <= score <= .475){
+					color = "#ff9999";
+				}
+				else if(.476 <= score <= .5){
+					color = "#ff7f7f";
+				}
+				else if(.51 <= score <= .525){
+					color = "#ff6666";
+				}
+				else if(.526 <= score <= .55){
+					color = "#ff3232";
+				}
+				else if(.551 <= score <= .575){
+					color = "#ff1919";
+				}
+				else if(.576 <= score <= .6){
+					color = "#ff0000";
+				}
+				else if(.601 <= score <= .7){
+					color = "#e50000";
+				}
+				else {
+					color = "#cc0000";
+				}
+
+			var color2;
+				if (0 <= score <= .299 ){
+					color2 = "#ffffff";
+				} 
+				else if(.3 <= score <= .3999){
+					color2 = "#ffffff";
+				}
+				else if(.4 <= score <= .425){
+					color2 = "#ffe5e5";
+				}
+				else if(.426 <= score <= .45){
+					color2 = "#ffcccc";
+				}
+				else if(.451 <= score <= .475){
+					color2 = "#ffb2b2";
+				}
+				else if(.476 <= score <= .5){
+					color2 = "#ff9999";
+				}
+				else if(.51 <= score <= .525){
+					color2 = "#ff7f7f";
+				}
+				else if(.526 <= score <= .55){
+					color2 = "#ff6666";
+				}
+				else if(.551 <= score <= .575){
+					color2 = "#ff3232";
+				}
+				else if(.576 <= score <= .6){
+					color2 = "#ff1919";
+				}
+				else if(.6 <= score <= .7){
+					color2 = "#ff0000";
+				}
+				else {
+					color2 = "#e50000";
+				}
+			// maps for displaying firebase data on the site. 
+			colorMap[abree] = {fill: color};
+			colorMap2[abree] = {fill: color2};
+			statedata[abree] = {'name': name, 'abree': abree,'score': score, 'color': color, 'bitchyiest': bitchyiest};
+		});
+
+			
+
+			$(document).ready(function() {
+			  	$('#map').usmap({
+			    	'stateSpecificStyles': colorMap,
+			    	'stateSpecificHoverStyles': colorMap2,
+
+				    'click' : function(event, data) {
+				    	var currentStateData = statedata[data.name];
+				    	var percentBitchy = parseFloat(currentStateData.score*100).toFixed(2);
+				    	var bitchytweet = currentStateData.bitchyiest;
+	    			  	//Edit this to change sidebox contents
+
+						$("#sidebox").append( $( "bubble" ) ).html("<h3>"+currentStateData.name+"</h3><p>"+percentBitchy+"% Bitchiness</p><h4>Bitchiest Tweet of the Week:</h4>"+"<div class='bubble'>"+'"'+ bitchytweet+'"' + '<br>'+'<strong>  - citizen of ' + currentStateData.name+"</strong></div>");
+			    	}});
+				});
+			});
+
+	</script>
+
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-static-top" id="nav">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-logo"><img src="devil.png"></a>
+				<a class="navbar-brand">Bitchin' Tweets</a> 
+			</div>
+			<p class="navbar-text navbar-right"><a href="#about"class="navbar-link">About</a></p>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<!-- <div class="row"> -->
+		
+			<div id="map" class="center-block col-md-10" ></div><!-- class="center-block" -->
+	
+				<div class="col-md-3" id="jumbo"> <!-- style="background:transparent !important;" -->
+					<!-- <div class ="well"> -->
+						<div id="title"><h4>Bitchiness Meter</h4></div>
+						<div class='my-legend'>
+							<div class='legend-scale'>
+								<!-- Legend stuff starts -->
+							  <ul class='legend-labels'>
+							  	<li><span style='background:#cc0000;'></span>Off the Charts Bitchy!!!</li>
+							    <li><span style='background:#e50000;'></span>Extremely Bitchy!!</li>
+							    <li><span style='background:#ff0000;'></span>Incredibly Bitchy!</li>
+							    <li><span style='background:#ff1919;'></span>Very Very Bitchy</li>
+							    <li><span style='background:#ff3232;'></span>Very Bitchy</li>
+							  	<li><span style='background:#ff6666;'></span>Bitchy</li>
+							    <li><span style='background:#ff7f7f;'></span>Medium Bitchy</li>
+							    <li><span style='background:#ff9999;'></span>Quite Bitchy</li>
+							    <li><span style='background:#ffb2b2;'></span>Slighty Bitchy</li>
+							    <li><span style='background:#ffcccc;'></span>A bit Bitchy</li>
+							    <li><span style='background:#ffe5e5;'></span>Not quite Bitchy</li>
+							    <li><span style='background:#ffffff;'></span>Not Bitchy at all</li>
+							  </ul>
+							</div>
+							<div class='legend-source'></div>
+						<!-- </div> -->
+						<!-- legend stuff ends -->
+						
+					<!-- </div> -->
+					<hr>
+
+				<div id="sidebox">
+					<h4>Click a State to see more information!</h4>
+					<img src ="Disclaimer.png" width="100px;" position="block;"></img>
+					<p>Warning: Tweets are not filtered and may use inappropriate language.</p>
+					<!-- <p class=”bubble”>This is now a speech bubble!</p> -->
+				</div></div>
+			<!-- </div> -->
+		</div>
+	</div>
+	<!-- <div class="bubble">This is now a speech bubble!</div> -->
+	<!-- <div class="footer" id="sitefooter"> -->
+		<div id="about">
+	  	<div class="col-sm-4">
+	    	<div class="text-center">
+	  			<h3>What?</h3>
+	  		</div>
+	  		<p>For our Big-Data class at the University of Colorady Boulder, we decided to display the overall sentiment in each of the fifty States. This is a heat-map representation of the "Bitchyness-level" of tweets from across the nation. Many people use Twitter to express themselves, and we wanted to see if there would be noticeable differences in the negativity or positivity of tweets.</p> 
+		</div>
+		<div class="col-sm-5">
+		 	<div class="text-center">
+		  		<h3>How?</h3>
+		  	</div><p>
+	  		You must be wondering, how on earth did they do it?! Here's how: <br> We used Twitter's API to pull tweets that had geolocation data within the United States. We stored these tweets in a Cassandra Cluster hosted on a pair of Amazon EC2 servers. From there, we ran the tweets through an algorithm to designate a "bitchyness-score," using Watson's Sentiment Analysis API and our own python script that parsed the results from Watson. We used a jquery- plugin US-Map in order to create this awesome heatmap and we used bootstrap to enhance our User Interface.</p> 
+		</div>
+		<div class="col-sm-3">
+		 	<div class="text-center">
+				<h3>The Team!</h3>
+			</div>
+			<div class="text-center">
+			 Sigrunn Sky <br>
+			 Ben Droste <br>
+			 Jesus Ortiz Tovar <br>
+			 Justin Schiller <br>
+			 Moon Yin
+			 </div>
+		</div>
+	</div>
+	<div class="row"
+</div>
+ 
+
+</body>
+</html>

@@ -1,0 +1,2 @@
+'{"id_str": "Monkey1", "text": "I hate everyone. You all suck","created_at": '20160414',"geo": "Boulder, CO"}'
+'{'id_str': 'Monkey2', 'text': 'This is a test tweet','created_at': '20160414','geo': 'Billings, MT'}'

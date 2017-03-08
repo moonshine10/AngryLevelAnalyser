@@ -1,0 +1,18 @@
+{
+  "name": "npm_demo",
+  "version": "1.0.0",
+  "description": "demo npm",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "first"
+  ],
+  "author": "Moon Yin",
+  "license": "ISC",
+  "dependencies": {
+    "twit": "^2.2.2",
+    "twitter": "^1.2.5"
+  }
+}

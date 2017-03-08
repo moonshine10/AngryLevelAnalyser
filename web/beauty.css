@@ -1,0 +1,146 @@
+/*Custom css that is being imported into index.html*/
+body { 
+   background: #505662;
+   color:#dbe3ef;
+   padding-bottom: 100px;
+   padding-left: 10px
+   font-family:"Trebuchet MS", Helvetica, sans-serif;
+}
+.row { padding-top: 40px; 
+	padding-bottom: 40px; }
+
+span.glyphicon {
+	font-size: 50px;  
+}
+
+#map{
+	width: 999px;
+	height: 720px;
+}
+
+#jumbo {
+    float:right;
+    padding: 18px;
+    background-color: #2e3138;
+    color: #e3e5e8;
+    /*font-family: helvetica;*/
+  }
+
+#nav{
+    background-image: linear-gradient(to bottom,#2f2e2e 0,#505662 100%); 
+    border-color: #505662; 
+    height: 70px;
+    margin-bottom: 50px;
+    width: 101%;
+}
+.navbar-inverse .navbar-logo {
+  height: auto;
+  float: left;
+  padding-top: 13px;
+  padding-right: 10px;
+}
+.navbar-inverse .navbar-brand {
+    color: #d6d6d6 ;
+    font-size: 30px;
+    padding-top: 18px;
+    font-family:"Trebuchet MS", Helvetica, sans-serif;
+    text-shadow: 0 0 16px red;
+  }
+  .navbar-inverse .navbar-link {
+    color: #e3e5e8 ;
+    font-family:"Trebuchet MS", Helvetica, sans-serif;
+    /*text-shadow: 0 0 10px red;*/
+  }
+
+div#about {
+    color: #e3e5e8;
+    font-size: 14px;
+    padding-left: 10px;
+}
+/*Legend stuff*/
+
+  #title {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 40px;
+    font-family:"Trebuchet MS", Helvetica, sans-serif;
+    }
+  .my-legend .legend-scale ul {
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    float: left;
+    list-style: none;
+    }
+  .my-legend .legend-scale ul li {
+    font-size: 80%;
+    list-style: none;
+    margin-left: 0;
+    line-height: 18px;
+    margin-bottom: 2px;
+    }
+  .my-legend ul.legend-labels li span {
+    display: block;
+    float: left;
+    height: 16px;
+    width: 30px;
+    margin-right: 7px;
+    margin-left: 0;
+    border: 1px solid #999;
+    }
+  .my-legend .legend-source {
+    font-size: 70%;
+    color: #c1c3c1;
+    clear: both;
+    }
+
+  .my-legend a {
+    color: #fff;
+    }
+  #sidebox{
+    font-family:"Trebuchet MS", Helvetica, sans-serif;
+  }
+  .bubble 
+  {
+    position: relative;
+    width: 265px;
+    /*height: 120px;*/
+    padding: 7px;
+    background: #505662;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    border: #ff6666 solid 5px;
+    margin-bottom: 15px;
+  }
+
+  .bubble:after 
+  {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 14px 0;
+    border-color: #505662 transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    bottom: -15px;
+    left: 26px;
+  }
+
+  .bubble:before 
+  {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 19px 18px 0;
+    border-color: #ff6666 transparent;
+    display: block;
+    width: 0;
+    z-index: 0;
+    bottom: -24px;
+    left: 22px;
+  }
+
+</style>
