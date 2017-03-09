@@ -14,6 +14,6 @@ If link doesn't work, there is a screenshot of our webpage.
 
 
 # Technology involved
-NodeJS was used when we were using twitter's API to stream tweets, the data gets stored in Cassandra database in our AWS EC2 server. For front end we used Firebase. In In this project my focus is on the backend. I built the application streaming twitter API the data processing, set up instances in EC2, and worked on the Cassandra database as well as the script. 
+NodeJS was used when we were using twitter's API to stream tweets, the data gets stored in Cassandra database in our AWS EC2 server. For front end we used Firebase. In In this project my focus is on the backend. I built the application streaming tweets through twitter API and processes the data , set up instances in EC2, and worked on the Cassandra database as well as the script. 
 
 
